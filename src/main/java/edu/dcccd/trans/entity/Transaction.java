@@ -2,6 +2,7 @@ package edu.dcccd.trans.entity;
 
 import lombok.Data;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -9,8 +10,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 @Data
-public class Transaction {
-    private Long id;
+@Entity
+@Table(name = "TRANSACTION")
+public class Transaction
+{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String time;
     @NotNull
     @NotEmpty
@@ -19,6 +26,7 @@ public class Transaction {
     @NotEmpty
     private String description;
     @NotNull
+    @Column(precision = 7, scale = 2)
     private BigDecimal amount;
     @NotNull
     private String type;
